@@ -1,7 +1,10 @@
 const express = require('express');
 const { gql, ApolloServer } = require('apollo-server-express');
+
 // const typeDefs = require('./typedefs');
 // const productTypedefs = require('./modules/products/product.typedef');
+
+require('dotenv').config()
 
 // Dummy Data
 const products = [
@@ -137,7 +140,8 @@ function startServer () {
     });
 
     server.applyMiddleware({ app });
-    const PORT = 3000;
+    console.log(process.env.PORT);
+    const PORT = process.env.PORT || 3000;
 
     app.listen(PORT, () => {
         console.log(`Server listening at http://localhost:${PORT}${server.graphqlPath}`);
