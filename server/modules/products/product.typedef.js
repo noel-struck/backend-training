@@ -19,7 +19,7 @@ const typeDefs = gql`
         inventory: Int
     }
 
-    type Query {
+    extend type Query {
         products: [Product]
         product(id: Int): Product
     }

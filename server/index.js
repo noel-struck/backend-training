@@ -1,10 +1,7 @@
 const express = require('express');
 const { gql, ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./modules/products/product.typedef');
-const resolvers = require('./modules/products/product.resolver');
-
-// const typeDefs = require('./typedefs');
-// const productTypedefs = require('./modules/products/product.typedef');
+const productTypeDef = require('./modules/products/product.typedef');
+const productResolver = require('./modules/products/product.resolver');
 
 require('dotenv').config()
 
@@ -12,9 +9,18 @@ require('dotenv').config()
 function startServer () {
     const app = express();
 
+    const typeDef = gql`
+        type Query
+    `;
+
     const server = new ApolloServer({
-        typeDefs,
-        resolvers,
+        typeDefs: [
+            typeDef, 
+            productTypeDef
+        ],
+        resolvers: [
+            productResolver
+        ],
     });
 
     server.applyMiddleware({ app });
