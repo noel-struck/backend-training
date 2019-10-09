@@ -105,11 +105,18 @@ const resolvers = {
         },
         updateProduct: (parent, params) => {
             try {
-                const index = products.findIndex((item, index) => {
-                    return item._id === params.id;
-                });
-                console.log(index);
+                const index = products.findIndex(item => item._id === params.id);
                 products[index] = params.product;
+                return products;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        deleteProduct: (parent, params) => {
+            try {
+                const index = products.findIndex(item => item._id === params.id);
+                const deleted = products.splice(index, 1);
+                console.log(deleted);
                 return products;
             } catch (error) {
                 console.log(error);
@@ -120,8 +127,8 @@ const resolvers = {
 
 
 
-
-const startServer = () => {
+// SERVER CONFIGURATION
+function startServer () {
     const app = express();
 
     const server = new ApolloServer({
