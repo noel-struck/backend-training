@@ -1,17 +1,34 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server-express');
 
-const product = gql`
+// Type Definition
+const typeDefs = gql`
     type Product {
+        _id: ID
         title: String
         description: String
         sizes: [String]
-        price: Number
-        inventory: Number
+        price: Float
+        inventory: Int
+    }
+
+    input ProductInput {
+        title: String!
+        description: String
+        sizes: [String]
+        price: Float!
+        inventory: Int
     }
 
     type Query {
-        productList: [Product]
+        products: [Product]
+        product(id: Int): Product
+    }
+
+    type Mutation {
+        createProduct(product: ProductInput!): [Product]
+        updateProduct(id: Int, product: ProductInput!): [Product]
+        deleteProduct(id: Int): [Product]
     }
 `;
 
-module.exports = product;
+module.exports = typeDefs;

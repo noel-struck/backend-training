@@ -1,7 +1,8 @@
 
+// Dummy Data
 const products = [
     {
-        _id: '1',
+        _id: 1,
         title: 'My first product',
         description: 'Ullamco reprehenderit culpa commodo occaecat irure ipsum exercitation deserunt irure officia est amet aliquip et.',
         sizes: ['S', 'M', 'L'],
@@ -9,7 +10,7 @@ const products = [
         inventory: 100,
     },
     {
-        _id: '2',
+        _id: 2,
         title: 'My second product',
         description: 'Ullamco reprehenderit culpa commodo occaecat irure ipsum exercitation deserunt irure officia est amet aliquip et.',
         sizes: ['S'],
@@ -17,7 +18,7 @@ const products = [
         inventory: 50,
     },
     {
-        _id: '3',
+        _id: 3,
         title: 'My third product',
         description: 'Ullamco reprehenderit culpa commodo occaecat irure ipsum exercitation deserunt irure officia est amet aliquip et.',
         sizes: ['L'],
@@ -25,7 +26,7 @@ const products = [
         inventory: 200,
     },
     {
-        _id: '4',
+        _id: 4,
         title: 'A really big product',
         description: 'Ullamco reprehenderit culpa commodo occaecat irure ipsum exercitation deserunt irure officia est amet aliquip et.',
         sizes: ['XL'],
@@ -33,7 +34,7 @@ const products = [
         inventory: 3,
     },
     {
-        _id: '4',
+        _id: 5,
         title: 'The smallest product',
         description: 'Ullamco reprehenderit culpa commodo occaecat irure ipsum exercitation deserunt irure officia est amet aliquip et.',
         sizes: ['XS'],
