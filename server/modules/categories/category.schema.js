@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-const typeDef = gql`
+const schema = gql`
     type Category {
         _id: ID!
         name: String
@@ -22,4 +22,4 @@ const typeDef = gql`
     }
 `
 
-module.exports = typeDef;
+module.exports = schema;

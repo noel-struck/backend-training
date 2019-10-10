@@ -1,7 +1,7 @@
 const express = require('express');
 const { gql, ApolloServer } = require('apollo-server-express');
-const productTypeDef = require('./modules/products/product.typedef');
-const categoryTypeDef = require('./modules/categories/category.typedef');
+const productSchema = require('./modules/products/product.schema');
+const categorySchema = require('./modules/categories/category.schema');
 const productResolver = require('./modules/products/product.resolver');
 
 require('dotenv').config()
@@ -18,8 +18,8 @@ function startServer () {
     const server = new ApolloServer({
         typeDefs: [
             typeDef, 
-            productTypeDef,
-            categoryTypeDef
+            productSchema,
+            categorySchema
         ],
         resolvers: [
             productResolver

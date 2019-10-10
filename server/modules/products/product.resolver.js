@@ -3,9 +3,9 @@ const products = require('./product.data');
 const resolvers = {
     Query: {
         products: () => products,
-        product: (parent, params) => {
+        product: (parent, args) => {
             try {
-                const productReturned = products.find(item => item._id === params.id);
+                const productReturned = products.find(item => item._id === args.id);
                 return productReturned;
             } catch (error) {
                 console.log(error);
@@ -13,29 +13,29 @@ const resolvers = {
         }
     },
     Mutation: {
-        createProduct: (parent, params) => {
+        createProduct: (parent, args) => {
             try {
                 const idArray = products.map(item => item._id);
                 const maxId = Math.max(...idArray);
-                params.product._id = maxId + 1;
-                products.push(params.product);
-                return params.product;
+                args.product._id = maxId + 1;
+                products.push(args.product);
+                return args.product;
             } catch (error) {
                 console.log(error);
             }
         },
-        updateProduct: (parent, params) => {
+        updateProduct: (parent, args) => {
             try {
-                const index = products.findIndex(item => item._id === params.id);
-                products[index] = params.product;
+                const index = products.findIndex(item => item._id === args.id);
+                products[index] = args.product;
                 return products[index];
             } catch (error) {
                 console.log(error);
             }
         },
-        deleteProduct: (parent, params) => {
+        deleteProduct: (parent, args) => {
             try {
-                const index = products.findIndex(item => item._id === params.id);
+                const index = products.findIndex(item => item._id === args.id);
                 const deleted = products.splice(index, 1);
                 console.log(deleted);
                 return products;
