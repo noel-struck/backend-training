@@ -18,9 +18,8 @@ const resolvers = {
                 const idArray = products.map(item => item._id);
                 const maxId = Math.max(...idArray);
                 params.product._id = maxId + 1;
-                console.log('new product: ', params.product);
                 products.push(params.product);
-                return products;
+                return params.product;
             } catch (error) {
                 console.log(error);
             }
@@ -29,7 +28,7 @@ const resolvers = {
             try {
                 const index = products.findIndex(item => item._id === params.id);
                 products[index] = params.product;
-                return products;
+                return products[index];
             } catch (error) {
                 console.log(error);
             }

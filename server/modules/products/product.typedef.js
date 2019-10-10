@@ -9,6 +9,7 @@ const typeDefs = gql`
         sizes: [String]
         price: Float
         inventory: Int
+        category: Category
     }
 
     input ProductInput {
@@ -17,6 +18,7 @@ const typeDefs = gql`
         sizes: [String]
         price: Float!
         inventory: Int
+        category: Int
     }
 
     extend type Query {
@@ -24,9 +26,9 @@ const typeDefs = gql`
         product(id: Int): Product
     }
 
-    type Mutation {
-        createProduct(product: ProductInput!): [Product]
-        updateProduct(id: Int, product: ProductInput!): [Product]
+    extend type Mutation {
+        createProduct(product: ProductInput!): Product
+        updateProduct(id: Int, product: ProductInput!): Product
         deleteProduct(id: Int): [Product]
     }
 `;
