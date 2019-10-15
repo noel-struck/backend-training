@@ -28,6 +28,7 @@ const resolvers = {
             try {
                 const index = products.findIndex(item => item._id === args.id);
                 products[index] = args.product;
+                products[index]._id = args.id;
                 return products[index];
             } catch (error) {
                 console.log(error);

@@ -12,7 +12,7 @@ const schema = gql`
 
     extend type Query {
         categories: [Category]
-        category(id: Int): Category
+        category(id: Int!): Category
     }
 
     extend type Mutation {

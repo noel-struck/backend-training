@@ -1,14 +1,19 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const { gql, ApolloServer } = require('apollo-server-express');
 const productSchema = require('./modules/products/product.schema');
 const categorySchema = require('./modules/categories/category.schema');
 const productResolver = require('./modules/products/product.resolver');
+const categoryResolver = require('./modules/categories/category.resolver');
 
 require('dotenv').config()
 
 // SERVER CONFIGURATION
-function startServer () {
+async function startServer () {
     const app = express();
+
+    // MongoDB Connection
+    await mongoose.connect(process.env.DB_STRING, {useNewUrlParser: true});
 
     const typeDef = gql`
         type Query
@@ -22,7 +27,8 @@ function startServer () {
             categorySchema
         ],
         resolvers: [
-            productResolver
+            productResolver,
+            categoryResolver,
         ],
     });
 
