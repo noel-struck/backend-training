@@ -37,6 +37,16 @@ const resolvers = {
             } catch (error) {
                 console.log(error);
             }
+        },
+        deleteCategory: (parent, args) => {
+            try {
+                const index = categories.findIndex(item => item._id === args.id);
+                const deleted = categories.splice(index, 1);
+                console.log(deleted);
+                return categories;
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 }
