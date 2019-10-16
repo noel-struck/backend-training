@@ -4,6 +4,7 @@ const schema = gql`
     type Category {
         _id: ID!
         name: String
+        products: [Product]
     }
 
     input categoryInput {

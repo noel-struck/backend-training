@@ -6,7 +6,6 @@ const resolvers = {
         category: (parent, args) => {
             try {
                 const currentCategory = categories.find(item => item._id === parent.category);
-                console.log(currentCategory);
                 return currentCategory;
             } catch (error) {
                 console.log(error);

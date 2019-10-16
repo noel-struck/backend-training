@@ -1,6 +1,16 @@
 const categories = require('./category.data');
+const products = require('../products/product.data');
 
 const resolvers = {
+    Category: {
+        products: (parent, args) => {
+            try {
+                return products.filter(item => item.category === parent._id);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    },
     Query: {
         categories: () => {
             console.log(categories);
