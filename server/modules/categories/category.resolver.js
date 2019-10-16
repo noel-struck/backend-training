@@ -12,14 +12,10 @@ const resolvers = {
         }
     },
     Query: {
-        categories: () => {
-            console.log(categories);
-            return categories;
-        },
+        categories: () => categories,
         category: (parent, args) => {
             try {
                 const index = categories.findIndex(item => item._id === args.id);
-                console.log(index);
                 return categories[index];
             } catch (error) {
                 console.log(error);
@@ -51,8 +47,7 @@ const resolvers = {
         deleteCategory: (parent, args) => {
             try {
                 const index = categories.findIndex(item => item._id === args.id);
-                const deleted = categories.splice(index, 1);
-                console.log(deleted);
+                categories.splice(index, 1);
                 return categories;
             } catch (error) {
                 console.log(error);
