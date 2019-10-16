@@ -1,6 +1,18 @@
 const products = require('./product.data');
+const categories = require('../categories/category.data');
 
 const resolvers = {
+    Product: {
+        category: (parent, args) => {
+            try {
+                const currentCategory = categories.find(item => item._id === parent.category);
+                console.log(currentCategory);
+                return currentCategory;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    },
     Query: {
         products: () => products,
         product: (parent, args) => {
