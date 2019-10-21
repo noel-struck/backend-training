@@ -1,4 +1,4 @@
-const products = require('./product.data');
+const products = require('./product.model');
 const categories = require('../categories/category.data');
 
 const resolvers = {
