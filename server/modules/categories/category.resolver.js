@@ -1,54 +1,62 @@
-const categories = require('./category.data');
-const products = require('../products/product.data');
+const categoryModel = require('./category.model');
+const productModel = require('../products/product.model');
 
 const resolvers = {
     Category: {
         products: (parent, args) => {
             try {
-                return products.filter(item => item.category === parent._id);
+                return productModel.find({category: parent._id});
             } catch (error) {
                 console.log(error);
             }
         }
     },
     Query: {
-        categories: () => categories,
-        category: (parent, args) => {
+        categories: async (parent, args) => {
             try {
-                const index = categories.findIndex(item => item._id === args.id);
-                return categories[index];
+                const data = await categoryModel.find();
+                console.log(data);
+                return data;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        category: async (parent, args) => {
+            try {
+                const data = await categoryModel.findById(args.id);
+                console.log(data);
+                return data;
             } catch (error) {
                 console.log(error);
             }
         }
     },
     Mutation: {
-        createCategory: (parent, args) => {
+        createCategory: async (parent, args) => {
             try {
-                const idArray = categories.map(item => item._id);
-                const maxId = Math.max(...idArray);
-                args.category._id = maxId + 1;
-                categories.push(args.category);
-                return args.category;
+                const categoryInstance = new categoryModel(args.category);
+                const categorySaved = await categoryInstance.save();
+                console.log(categorySaved);
+                return categorySaved;
             } catch (error) {
                 console.log(error);
             }
         },
-        updateCategory: (parent, args) => {
+        updateCategory: async (parent, args) => {
             try {
-                const index = categories.findIndex(item => item._id === args.id);
-                categories[index] = args.category;
-                categories[index]._id = args.id;
-                return categories[index];
+                const data = await categoryModel.findByIdAndUpdate(args.id, args.category, {
+                    new: true,
+                });
+                console.log(data);
+                return data;
             } catch (error) {
                 console.log(error);
             }
         },
-        deleteCategory: (parent, args) => {
+        deleteCategory: async (parent, args) => {
             try {
-                const index = categories.findIndex(item => item._id === args.id);
-                categories.splice(index, 1);
-                return categories;
+                await categoryModel.findByIdAndDelete(args.id);
+                return await categoryModel.find();
             } catch (error) {
                 console.log(error);
             }
