@@ -7,19 +7,24 @@ const schema = gql`
         products: [Product]
     }
 
-    input categoryInput {
+    input CategoryInput {
+        name: String
+    }
+
+    type CategoryCreated {
+        _id: ID
         name: String
     }
 
     extend type Query {
         categories: [Category]
-        category(id: Int!): Category
+        category(id: String!): Category
     }
 
     extend type Mutation {
-        createCategory(category: categoryInput!): Category
-        updateCategory(id: Int!, category: categoryInput!): Category
-        deleteCategory(id: Int!): [Category]
+        createCategory(category: CategoryInput!): CategoryCreated
+        updateCategory(id: String!, category: CategoryInput!): Category
+        deleteCategory(id: String!): [Category]
     }
 `
 

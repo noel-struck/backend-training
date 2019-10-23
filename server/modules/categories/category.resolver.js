@@ -14,18 +14,14 @@ const resolvers = {
     Query: {
         categories: async (parent, args) => {
             try {
-                const data = await categoryModel.find();
-                console.log(data);
-                return data;
+                return await categoryModel.find();
             } catch (error) {
                 console.log(error);
             }
         },
         category: async (parent, args) => {
             try {
-                const data = await categoryModel.findById(args.id);
-                console.log(data);
-                return data;
+                return await categoryModel.findById(args.id);
             } catch (error) {
                 console.log(error);
             }
@@ -35,20 +31,16 @@ const resolvers = {
         createCategory: async (parent, args) => {
             try {
                 const categoryInstance = new categoryModel(args.category);
-                const categorySaved = await categoryInstance.save();
-                console.log(categorySaved);
-                return categorySaved;
+                return await categoryInstance.save();
             } catch (error) {
                 console.log(error);
             }
         },
         updateCategory: async (parent, args) => {
             try {
-                const data = await categoryModel.findByIdAndUpdate(args.id, args.category, {
+                return await categoryModel.findByIdAndUpdate(args.id, args.category, {
                     new: true,
                 });
-                console.log(data);
-                return data;
             } catch (error) {
                 console.log(error);
             }
