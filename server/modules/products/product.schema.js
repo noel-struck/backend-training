@@ -18,7 +18,7 @@ const schema = gql`
         sizes: [String]
         price: Float!
         inventory: Int
-        category: Int
+        category: String!
     }
 
     extend type Query {

@@ -47,7 +47,7 @@ const resolvers = {
         },
         deleteCategory: async (parent, args) => {
             try {
-                await categoryModel.findByIdAndDelete(args.id);
+                const objectDeleted = await categoryModel.findByIdAndDelete(args.id);
                 return await categoryModel.find();
             } catch (error) {
                 console.log(error);

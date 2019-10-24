@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { gql, ApolloServer } = require('apollo-server-express');
+const { gql, ApolloServer, UserInputError } = require('apollo-server-express');
 const productSchema = require('./modules/products/product.schema');
 const categorySchema = require('./modules/categories/category.schema');
 const productResolver = require('./modules/products/product.resolver');

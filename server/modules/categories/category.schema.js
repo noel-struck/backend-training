@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const schema = gql`
+    "A type where you define the categories for products, you could have manhy products for a single category"
     type Category {
         _id: ID!
         name: String

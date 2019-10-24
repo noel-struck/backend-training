@@ -1,56 +1,44 @@
-const products = require('./product.model');
-const categories = require('../categories/category.data');
+const productModel = require('./product.model');
 
 const resolvers = {
-    Product: {
-        category: (parent, args) => {
+    Query: {
+        products: async (parent, args) => {
             try {
-                const currentCategory = categories.find(item => item._id === parent.category);
-                return currentCategory;
+                return await productModel.find().populate('category');
             } catch (error) {
                 console.log(error);
             }
         },
-    },
-    Query: {
-        products: () => products,
-        product: (parent, args) => {
+        product: async (parent, args) => {
             try {
-                const productReturned = products.find(item => item._id === args.id);
-                return productReturned;
+                return await productModel.findById(args.id).populate('category');
             } catch (error) {
                 console.log(error);
             }
         }
     },
     Mutation: {
-        createProduct: (parent, args) => {
+        createProduct: async (parent, args) => {
             try {
-                const idArray = products.map(item => item._id);
-                const maxId = Math.max(...idArray);
-                args.product._id = maxId + 1;
-                products.push(args.product);
-                return args.product;
+                const productInstance = new productModel(args.product);
+                return await productInstance.save();
             } catch (error) {
                 console.log(error);
             }
         },
-        updateProduct: (parent, args) => {
+        updateProduct: async (parent, args) => {
             try {
-                const index = products.findIndex(item => item._id === args.id);
-                products[index] = args.product;
-                products[index]._id = args.id;
-                return products[index];
+                return await productModel.findByIdAndUpdate(args.id, args.product, {
+                    new: true
+                })
             } catch (error) {
                 console.log(error);
             }
         },
-        deleteProduct: (parent, args) => {
+        deleteProduct: async (parent, args) => {
             try {
-                const index = products.findIndex(item => item._id === args.id);
-                const deleted = products.splice(index, 1);
-                console.log(deleted);
-                return products;
+                await productModel.findByIdAndDelete(args.id);
+                return await productModel.find();
             } catch (error) {
                 console.log(error);
             }
