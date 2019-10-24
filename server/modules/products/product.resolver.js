@@ -21,7 +21,10 @@ const resolvers = {
         createProduct: async (parent, args) => {
             try {
                 const productInstance = new productModel(args.product);
-                return await productInstance.save();
+                const productCreated = await productInstance.save();
+                return productModel
+                        .findById(productCreated._id)
+                        .populate('category');
             } catch (error) {
                 console.log(error);
             }
